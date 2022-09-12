@@ -56,17 +56,17 @@ const Season = () => {
   }
   return (
     <section className='flex flex-col items-center'>
-      <div className='flex items-start gap-6'>
+      <div className='flex items-start gap-6 lg:flex-col'>
         <div className='overflow-hidden'>
           <img
-            className='w-[20vw] aspect-auto hover:scale-110 duration-500'
+            className='w-[20rem] aspect-auto hover:scale-110 duration-500'
             src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
             alt='episode image'
           />
         </div>
         <div className='flex flex-col gap-5 pt-[5%] max-w-[50vw]'>
           <h2 className='text-5xl font-bold'>{season.name}</h2>
-          <p>"{season.overview}"</p>
+          <p>{`"${season.overview}"`}</p>
           <p>Air Date: {season.air_date}</p>
           <p>Episodes : {season.episodes.length}.</p>
           <div className='flex gap-4'>
@@ -103,7 +103,7 @@ const Season = () => {
                   src={`https://image.tmdb.org/t/p/w1280${ep.still_path}`}
                 />
               </div>
-              <div className='flex flex-col col-span-2 gap-5 pt-[5%] pl-6'>
+              <div className='flex flex-col col-span-2 gap-5 pt-[5%] pl-6 sm:text-sm'>
                 <h2 className='text-5xl font-bold'>{ep.name}</h2>
                 <p>{`"${ep.overview}"`}</p>
                 <p>Air Date: {ep.air_date}</p>
