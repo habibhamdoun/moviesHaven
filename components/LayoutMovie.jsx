@@ -1,24 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
-import { baseUrl } from '../Constants';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import MovieRow from './MovieRow';
 
 const LayoutMovie = () => {
-  const [data, setData] = React.useState(undefined);
-  const [genreDataState, setGenreDataState] = React.useState(undefined);
-  const [bgMovie, setBgMovie] = React.useState(
-    genreDataState
-      ? genreDataState[0]
-      : {
-          original_title: 'Orphan: First Kill',
-          overview:
-            'After escaping from an Estonian psychiatric facility, Leena Klammer travels to America by impersonating Esther, the missing daughter of a wealthy family. But when her mask starts to slip, she is put against a mother who will protect her family from the murderous “child” at any cost.',
-          backdrop_path: '/5GA3vV1aWWHTSDO5eno8V5zDo8r.jpg',
-        },
-  );
-  const [genre, setGenre] = React.useState('latest');
+  const [bgMovie, setBgMovie] = React.useState({
+    original_title: 'Orphan: First Kill',
+    overview:
+      'After escaping from an Estonian psychiatric facility, Leena Klammer travels to America by impersonating Esther, the missing daughter of a wealthy family. But when her mask starts to slip, she is put against a mother who will protect her family from the murderous “child” at any cost.',
+    backdrop_path: '/5GA3vV1aWWHTSDO5eno8V5zDo8r.jpg',
+  });
   const router = useRouter();
   return (
     <motion.section
@@ -55,7 +47,7 @@ const LayoutMovie = () => {
           </button>
         </Link>
       </div>
-      <motion.div className='w-[100vw] relative'>
+      <div className='w-[100vw] relative'>
         <img
           src={`https://image.tmdb.org/t/p/w1280${
             bgMovie
@@ -75,64 +67,13 @@ const LayoutMovie = () => {
             </button>
           </Link>
         </div>
-      </motion.div>
-
-      {/* <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-        {genreDataState?.length < 1 ? (
-          <div>no {genreName(genre)} movies are on this page</div>
-        ) : (
-          genreDataState?.map((res) => (
-            <Link key={res.id} href={`/movie/${res.id}`}>
-              <motion.div
-                key={res.id}
-                className='flex flex-col items-center justify-center h-fit overflow-hidden relative'
-                initial={{ scale: 0.1 }}
-                animate={{ scale: 1 }}
-              >
-                <div className='overflow-hidden cursor-pointer'>
-                  <img
-                    className='w-100% hover:scale-110 duration-500'
-                    src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
-                  />
-                </div>
-                <h2 className='text-2xl font-bold'> {res.original_title} </h2>
-              </motion.div>
-            </Link>
-          ))
-        )}
-      </div> */}
-      <div>
-        <h2 className='text-5xl pb-3'>NOW PLAYING :</h2>
-        <MovieRow fetchedGenre={'now_playing'} title={'Now Playing'} />
-        <MovieRow fetchedGenre={'popular'} title={'Popular'} />
       </div>
-      {/* <div className='flex justify-center gap-5 py-6'>
-        <button
-          onClick={() => {
-            setGenre(undefined);
-            router.push(
-              router.basePath + `?page=${parseInt(router.query.page) - 1}`,
-            );
-          }}
-          className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          disabled={!router.query.page || router.query.page == 1}
-        >
-          Previous Page
-        </button>
-        <button
-          onClick={() => {
-            setGenre(undefined);
-            router.push(
-              router.basePath +
-                `?page=${parseInt(router.query?.page || 1) + 1}`,
-            );
-          }}
-          className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          disabled={parseInt(router.query?.page) === maxPages}
-        >
-          Next Page
-        </button>
-      </div> */}
+      <div className='pt-10'>
+        <MovieRow fetchedGenre={'now_playing'} title={'NOW PLAYING:'} />
+        <MovieRow fetchedGenre={'top_rated'} title={'TOP RATED:'} />
+        <MovieRow fetchedGenre={'upcoming'} title={'UPCOMING:'} />
+        <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} />
+      </div>
     </motion.section>
   );
 };

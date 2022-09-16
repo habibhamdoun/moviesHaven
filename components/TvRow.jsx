@@ -1,19 +1,24 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { baseUrl } from '../Constants';
 
-const MovieRow = (props) => {
+const TvRow = (props) => {
   const [data, setData] = React.useState(undefined);
   const [genreDataState, setGenreDataState] = React.useState(undefined);
   const [page, setPage] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
+  const ref = useRef(null);
+  function scroll(scrollOffset) {
+    scrl.current.scrollLeft += scrollOffset;
+    console.log(scrollOffset);
+  }
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         const resp = await fetch(
-          `${baseUrl}/movie/${props.fetchedGenre}?api_key=${
+          `${baseUrl}/tv/${props.fetchedGenre}?api_key=${
             process.env.NEXT_PUBLIC_API_KEY
           }&page=${page || 1}`,
         );
@@ -23,19 +28,26 @@ const MovieRow = (props) => {
         setMaxPages(returnData.total_pages);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, [genreDataState, data, page]);
+  React.useEffect(() => {
+    props.handleClick(genreDataState);
+  }, []);
+  if (loading) return <div>loading...</div>;
   if (!data) {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
     <section className='overflow-scroll w-[100vw]'>
       <h2 className='text-5xl pb-4'>{props.title}</h2>
+      <button onClick={() => props.handleClick(genreDataState)}>CHANGE</button>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
-          <Link key={res.id} href={`/movie/${res.id}`}>
+          <Link key={res.id} href={`/tv/${res.id}`}>
             <motion.div
               key={res.id}
               className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto'
@@ -48,7 +60,7 @@ const MovieRow = (props) => {
                   src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
                 />
               </div>
-              <h2 className='text-2xl font-bold'> {res.original_title} </h2>
+              <h2 className='text-2xl font-bold'> {res.original_name} </h2>
             </motion.div>
           </Link>
         ))}
@@ -77,4 +89,4 @@ const MovieRow = (props) => {
   );
 };
 
-export default MovieRow;
+export default TvRow;

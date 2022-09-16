@@ -1,80 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
-import { baseUrl } from '../Constants';
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import TvRow from './TvRow';
 
 const LayoutTv = () => {
-  const [data, setData] = React.useState([]);
-  const [genre, setGenre] = React.useState('latest');
-  const [fetchedGenre, setFetchedGenre] = React.useState('popular');
-  const [genreDataState, setGenreDataState] = React.useState(undefined);
-  const [loading, setLoading] = React.useState(true);
-  const [maxPages, setMaxPages] = React.useState(0);
-  const [bgMovie, setBgMovie] = React.useState(
-    genreDataState
-      ? genreDataState[0]
-      : {
-          original_name: 'Cobra Kai',
-          backdrop_path: '/g63KmFgqkvXu6WKS23V56hqEidh.jpg',
-          overview:
-            'This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.',
-        },
-  );
-  const router = useRouter();
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resp = await fetch(
-          `${baseUrl}/tv/${fetchedGenre ? fetchedGenre : 'popular'}?api_key=${
-            process.env.NEXT_PUBLIC_API_KEY
-          }&page=${router.query?.page || 1}`,
-        );
-        const returnData = await resp.json();
-        setData(returnData.results);
-        setGenreDataState(data);
-        setMaxPages(returnData.total_pages);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-      // console.log(returnData);
-      // console.log(resp);
-    };
-    fetchData();
-  }, [router, fetchedGenre, data]);
-  function randomMovie() {
-    if (!genreDataState) return;
-    let randomNum = Math.floor(Math.random() * 20);
-    setBgMovie(genreDataState[randomNum]);
+  const [bgMovie, setBgMovie] = React.useState({
+    original_name: 'Cobra Kai',
+    backdrop_path: '/g63KmFgqkvXu6WKS23V56hqEidh.jpg',
+    overview:
+      'This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.',
+  });
+  function handleClick(receivedData) {
+    if (!receivedData) return handleClick;
+    let random = Math.floor(Math.random() * receivedData?.length);
+    setBgMovie(receivedData[random]);
     console.log(bgMovie);
   }
   React.useEffect(() => {
-    randomMovie();
+    handleClick();
   }, []);
-  React.useEffect(() => {
-    setFetchedGenre('popular');
-  }, []);
-  async function changeGenre(num) {
-    setFetchedGenre(undefined);
-    if (!data) return;
-    setGenre(num);
-    setGenreDataState(() => {
-      return data.filter((movie) => {
-        if (movie.genre_ids?.includes(num)) return movie;
-      });
-    });
-    console.log('changed');
-  }
-  function genreName(gen) {
-    if (gen == 35) return <span>Comedy</span>;
-    if (gen == 18) return <span>Drama</span>;
-  }
-  if (loading) return <div>loading...</div>;
-  if (!data) {
-    return <div className='text-5xl'>no data found</div>;
-  }
+  const router = useRouter();
   return (
     <motion.section
       className='flex flex-col items-center'
@@ -109,7 +55,6 @@ const LayoutTv = () => {
             Tv Shows
           </button>
         </Link>
-        <button onClick={randomMovie}>Change</button>
       </div>
       <motion.div className='w-[100vw] relative'>
         <img
@@ -132,137 +77,26 @@ const LayoutTv = () => {
           </Link>
         </div>
       </motion.div>
-      <div className='flex justify-around flex-wrap'>
-        <button
-          className={
-            fetchedGenre === 'popular'
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={() => {
-            setGenreDataState(data);
-            setFetchedGenre('popular');
-            setGenre('popular');
-          }}
-        >
-          Popular
-        </button>
-        <button
-          className={
-            fetchedGenre === 'on_the_air'
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={() => {
-            setGenreDataState(data);
-            setFetchedGenre('on_the_air');
-            setGenre('on_the_air');
-          }}
-        >
-          On The Air
-        </button>
-        <button
-          className={
-            fetchedGenre === 'airing_today'
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={() => {
-            setGenreDataState(data);
-            setFetchedGenre('airing_today');
-            setGenre('airing_today');
-          }}
-        >
-          Airing Today
-        </button>
-        <button
-          className={
-            fetchedGenre === 'top_rated'
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={() => {
-            setGenreDataState(data);
-            setFetchedGenre('top_rated');
-            setGenre('topRated');
-          }}
-        >
-          Top rated
-        </button>
-        <button
-          className={
-            genre === 35
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={async () => await changeGenre(35)}
-        >
-          Comedy
-        </button>
-        <button
-          className={
-            genre === 18
-              ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6 font-bold text-xl bg-gray-600'
-              : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit m-6'
-          }
-          onMouseDown={async () => await changeGenre(18)}
-        >
-          Drama
-        </button>
-      </div>
-      <div
-        // className="flex  justify-center items-center flex-wrap gap-6"
-        className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3'
-      >
-        {genreDataState?.length < 1 ? (
-          <div>no {genreName(genre)} movies available on this page</div>
-        ) : (
-          genreDataState?.map((res) => (
-            <Link key={res.id} href={`/tv/${res.id}`}>
-              <motion.div
-                className='flex flex-col items-center justify-center h-fit overflow-hidden relative'
-                initial={{ scale: 0.1 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                key={res.id}
-              >
-                <div className='overflow-hidden cursor-pointer'>
-                  <img
-                    className='w-100% hover:scale-110 duration-500'
-                    src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
-                  />
-                </div>
-                <h2 className='text-2xl font-bold'> {res.original_name} </h2>
-              </motion.div>
-            </Link>
-          ))
-        )}
-      </div>
-      <div className='flex justify-center gap-5 py-6'>
-        <button
-          onClick={() => {
-            router.push(
-              router.basePath + `?page=${parseInt(router.query.page) - 1}`,
-            );
-          }}
-          className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          disabled={!router.query.page || router.query.page == 1}
-        >
-          Previous Page
-        </button>
-        <button
-          onClick={() => {
-            router.push(
-              router.basePath +
-                `?page=${parseInt(router.query?.page || 1) + 1}`,
-            );
-          }}
-          className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          disabled={parseInt(router.query.page) === maxPages}
-        >
-          Next Page
-        </button>
-      </div>
+      <TvRow
+        fetchedGenre={'popular'}
+        title={'POPULAR:'}
+        handleClick={handleClick}
+      />
+      <TvRow
+        fetchedGenre={'top_rated'}
+        title={'TOP RATED:'}
+        handleClick={handleClick}
+      />
+      <TvRow
+        fetchedGenre={'on_the_air'}
+        title={'ON THE AIR:'}
+        handleClick={handleClick}
+      />
+      <TvRow
+        fetchedGenre={'airing_today'}
+        title={'AIRING TODAY:'}
+        handleClick={handleClick}
+      />
     </motion.section>
   );
 };
