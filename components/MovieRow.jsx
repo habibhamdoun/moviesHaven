@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { baseUrl } from '../Constants';
@@ -9,6 +8,7 @@ const MovieRow = (props) => {
   const [genreDataState, setGenreDataState] = React.useState(undefined);
   const [page, setPage] = React.useState(null);
   const [maxPages, setMaxPages] = React.useState(0);
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,20 +31,23 @@ const MovieRow = (props) => {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
-    <section className='overflow-scroll w-[100vw]'>
+    <section
+      onScroll={() => props.handleClick(genreDataState)}
+      className='overflow-scroll w-[100vw]'
+    >
       <h2 className='text-5xl pb-4'>{props.title}</h2>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
           <Link key={res.id} href={`/movie/${res.id}`}>
             <motion.div
               key={res.id}
-              className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto'
+              className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto '
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
             >
               <div className='overflow-hidden cursor-pointer'>
                 <img
-                  className='w-[100%] hover:scale-110 duration-500'
+                  className='w-[100%] hover:scale-110 duration-500 rounded-md'
                   src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
                 />
               </div>
