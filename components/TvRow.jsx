@@ -9,7 +9,11 @@ const TvRow = (props) => {
   const [page, setPage] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
-
+  const movieStyle = {
+    borderRadius: '46px 46px 46px 46px',
+    webkitBorderRadius: '46px 46px 46px 46px',
+    mozBorderRadius: '46px 46px 46px 46px',
+  };
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,7 +41,6 @@ const TvRow = (props) => {
   return (
     <section className='overflow-scroll w-[100vw]'>
       <h2 className='text-5xl pb-4'>{props.title}</h2>
-      <button onClick={() => props.handleClick(genreDataState)}>CHANGE</button>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
           <Link key={res.id} href={`/tv/${res.id}`}>
@@ -47,7 +50,10 @@ const TvRow = (props) => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
             >
-              <div className='overflow-hidden cursor-pointer'>
+              <div
+                className='overflow-hidden cursor-pointer'
+                style={movieStyle}
+              >
                 <img
                   className='w-[100%] hover:scale-110 duration-500'
                   src={`https://image.tmdb.org/t/p/original${res.poster_path}`}

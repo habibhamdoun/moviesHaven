@@ -11,6 +11,11 @@ const Tv = () => {
   const [id, setId] = React.useState('');
   const [loading, setLoading] = React.useState(true);
   const router = useRouter();
+  const seasonStyle = {
+    borderRadius: '46px 46px 46px 46px',
+    webkitBorderRadius: '46px 46px 46px 46px',
+    mozBorderRadius: '46px 46px 46px 46px',
+  };
   React.useEffect(() => {
     setId(router.query?.id);
   }, [router]);
@@ -107,7 +112,7 @@ const Tv = () => {
                 >
                   <h3>{season.name}</h3>
                   <div className='overflow-hidden'>
-                    <div className='overflow-hidden'>
+                    <div className='overflow-hidden' style={seasonStyle}>
                       <img
                         className=' aspect-auto  hover:scale-110 duration-500'
                         src={`https://image.tmdb.org/t/p/original${season.poster_path}`}

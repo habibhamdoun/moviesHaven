@@ -46,8 +46,9 @@ const Movie = () => {
   return (
     <section className='flex flex-col lg:items-center lg:justify-center lg:py-10 gap-6'>
       <div
-        //  className="flex items-center justify-center gap-3"
-        className='grid lg:grid-cols-5 md:grid-rows-2 gap-4'
+        className='md:flex md:items-center md:justify-center md:gap-3 
+         lg:items-center lg:flex-row
+        '
       >
         <img
           className='lg:col-span-3 md:w-[100%] md:h-[100%] md:bg-cover'

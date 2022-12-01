@@ -9,6 +9,7 @@ const Season = () => {
   const [tv, setTv] = React.useState(null);
   const [id, setId] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
     setLoading(true);
     setId(router.query.id);
