@@ -76,7 +76,7 @@ const Tv = () => {
           className='lg:col-span-3'
           src={`https://image.tmdb.org/t/p/original${tv.backdrop_path}`}
         />
-        <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2 pb-4'>
+        <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2 pb-4 border-yellow-600 border-l-[2px]'>
           <h2 className='text-5xl font-bold'>{tv.original_name}</h2>
           {tv.tagline && (
             <p className='font-semibold italic'>{`"${tv.tagline}"`}</p>
@@ -111,7 +111,9 @@ const Tv = () => {
                   }
                 >
                   <div className='overflow-hidden flex flex-col items-center justify-between'>
-                    <h3>{season.name}</h3>
+                    <h3 className='border-yellow-600 border-[2px] rounded p-1 m-1'>
+                      {season.name}
+                    </h3>
                     <div className='overflow-hidden' style={seasonStyle}>
                       <img
                         className=' aspect-auto  hover:scale-110 duration-500'

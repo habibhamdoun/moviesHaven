@@ -43,10 +43,14 @@ const LayoutTv = () => {
         </Link>
       </div>
       <BgTv />
-      <TvRow fetchedGenre={'popular'} title={'POPULAR:'} />
-      <TvRow fetchedGenre={'top_rated'} title={'TOP RATED:'} />
-      <TvRow fetchedGenre={'on_the_air'} title={'ON THE AIR:'} />
-      <TvRow fetchedGenre={'airing_today'} title={'AIRING TODAY:'} />
+      <TvRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={1} />
+      <TvRow fetchedGenre={'top_rated'} title={'TOP RATED:'} loadPage={1} />
+      <TvRow fetchedGenre={'on_the_air'} title={'ON THE AIR:'} loadPage={2} />
+      <TvRow
+        fetchedGenre={'airing_today'}
+        title={'AIRING TODAY:'}
+        loadPage={1}
+      />
     </motion.section>
   );
 };

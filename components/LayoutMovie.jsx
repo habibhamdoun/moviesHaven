@@ -45,10 +45,18 @@ const LayoutMovie = () => {
       <BgMovie />
 
       <div className='pt-10'>
-        <MovieRow fetchedGenre={'now_playing'} title={'NOW PLAYING:'} />
-        <MovieRow fetchedGenre={'top_rated'} title={'TOP RATED:'} />
-        <MovieRow fetchedGenre={'upcoming'} title={'UPCOMING:'} />
-        <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} />
+        <MovieRow
+          fetchedGenre={'now_playing'}
+          title={'NOW PLAYING:'}
+          loadPage={1}
+        />
+        <MovieRow
+          fetchedGenre={'top_rated'}
+          title={'TOP RATED:'}
+          loadPage={1}
+        />
+        <MovieRow fetchedGenre={'upcoming'} title={'UPCOMING:'} loadPage={1} />
+        <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={2} />
       </div>
     </motion.section>
   );

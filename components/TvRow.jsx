@@ -9,6 +9,7 @@ const TvRow = (props) => {
   const [page, setPage] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
+  const [loadPage, seetLoadPage] = React.useState(props.loadPage);
   const tvStyle = {
     borderRadius: '46px 46px 46px 46px',
     webkitBorderRadius: '46px 46px 46px 46px',
@@ -20,7 +21,7 @@ const TvRow = (props) => {
         const resp = await fetch(
           `${baseUrl}/tv/${props.fetchedGenre}?api_key=${
             process.env.NEXT_PUBLIC_API_KEY
-          }&page=${page || 1}`,
+          }&page=${page || loadPage}`,
         );
         const returnData = await resp.json();
         setData(returnData.results);
@@ -39,8 +40,10 @@ const TvRow = (props) => {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
-    <section className='overflow-scroll w-[100vw]'>
-      <h2 className='text-5xl pb-4'>{props.title}</h2>
+    <section className='overflow-scroll w-[100vw] lg:scrollbar-hide'>
+      <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
+        {props.title}
+      </h2>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
           <Link key={res.id} href={`/tv/${res.id}`}>

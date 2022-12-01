@@ -8,6 +8,7 @@ const MovieRow = (props) => {
   const [genreDataState, setGenreDataState] = React.useState(undefined);
   const [page, setPage] = React.useState(null);
   const [maxPages, setMaxPages] = React.useState(0);
+  const [loadPage, setLoadPage] = React.useState(props.loadPage);
   const movieStyle = {
     borderRadius: '46px 46px 46px 46px',
     webkitBorderRadius: '46px 46px 46px 46px',
@@ -19,7 +20,7 @@ const MovieRow = (props) => {
         const resp = await fetch(
           `${baseUrl}/movie/${props.fetchedGenre}?api_key=${
             process.env.NEXT_PUBLIC_API_KEY
-          }&page=${page || 1}`,
+          }&page=${page || loadPage}`,
         );
         const returnData = await resp.json();
         setData(returnData.results);
@@ -35,7 +36,7 @@ const MovieRow = (props) => {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
-    <section className='overflow-scroll w-[100vw]'>
+    <section className='overflow-scroll w-[100vw] lg:scrollbar-hide'>
       <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
         {props.title}
       </h2>
