@@ -9,11 +9,7 @@ const TvRow = (props) => {
   const [page, setPage] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
-  const ref = useRef(null);
-  function scroll(scrollOffset) {
-    scrl.current.scrollLeft += scrollOffset;
-    console.log(scrollOffset);
-  }
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,9 +30,6 @@ const TvRow = (props) => {
     };
     fetchData();
   }, [genreDataState, data, page]);
-  React.useEffect(() => {
-    props.handleClick(genreDataState);
-  }, []);
   if (loading) return <div>loading...</div>;
   if (!data) {
     return <div className='text-5xl'>no data found</div>;

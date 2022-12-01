@@ -31,10 +31,7 @@ const MovieRow = (props) => {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
-    <section
-      onScroll={() => props.handleClick(genreDataState)}
-      className='overflow-scroll w-[100vw]'
-    >
+    <section className='overflow-scroll w-[100vw]'>
       <h2 className='text-5xl pb-4'>{props.title}</h2>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
