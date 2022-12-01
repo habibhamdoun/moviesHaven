@@ -9,7 +9,7 @@ const TvRow = (props) => {
   const [page, setPage] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
-  const movieStyle = {
+  const tvStyle = {
     borderRadius: '46px 46px 46px 46px',
     webkitBorderRadius: '46px 46px 46px 46px',
     mozBorderRadius: '46px 46px 46px 46px',
@@ -50,10 +50,7 @@ const TvRow = (props) => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
             >
-              <div
-                className='overflow-hidden cursor-pointer'
-                style={movieStyle}
-              >
+              <div className='overflow-hidden cursor-pointer' style={tvStyle}>
                 <img
                   className='w-[100%] hover:scale-110 duration-500'
                   src={`https://image.tmdb.org/t/p/original${res.poster_path}`}

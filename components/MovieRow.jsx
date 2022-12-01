@@ -8,7 +8,11 @@ const MovieRow = (props) => {
   const [genreDataState, setGenreDataState] = React.useState(undefined);
   const [page, setPage] = React.useState(null);
   const [maxPages, setMaxPages] = React.useState(0);
-
+  const movieStyle = {
+    borderRadius: '46px 46px 46px 46px',
+    webkitBorderRadius: '46px 46px 46px 46px',
+    mozBorderRadius: '46px 46px 46px 46px',
+  };
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,7 +36,9 @@ const MovieRow = (props) => {
   }
   return (
     <section className='overflow-scroll w-[100vw]'>
-      <h2 className='text-5xl pb-4'>{props.title}</h2>
+      <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+        {props.title}
+      </h2>
       <div className='flex w-fit gap-5'>
         {genreDataState?.map((res) => (
           <Link key={res.id} href={`/movie/${res.id}`}>
@@ -42,7 +48,10 @@ const MovieRow = (props) => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
             >
-              <div className='overflow-hidden cursor-pointer'>
+              <div
+                className='overflow-hidden cursor-pointer'
+                style={movieStyle}
+              >
                 <img
                   className='w-[100%] hover:scale-110 duration-500 rounded-md'
                   src={`https://image.tmdb.org/t/p/original${res.poster_path}`}

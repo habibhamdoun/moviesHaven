@@ -38,10 +38,11 @@ const BgMovie = () => {
         }
       };
       fetchData();
-    }, 2000);
+    }, 5000);
   }, [genreDataState]);
   function changeBg() {
     let random = Math.floor(Math.random() * genreDataState?.length);
+    if (!genreDataState) return;
     setTimeout(() => {
       setBgMovie({
         original_title: genreDataState[random]?.original_title,

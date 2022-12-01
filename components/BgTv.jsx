@@ -38,7 +38,7 @@ const BgTv = () => {
         }
       };
       fetchData();
-    }, 2000);
+    }, 5000);
   }, [genreDataState]);
   function changeBg() {
     if (!genreDataState) return;
@@ -59,9 +59,9 @@ const BgTv = () => {
     <section>
       <AnimatePresence>
         <motion.div
-          initial={{ translateX: -1000 }}
+          initial={{ translateX: 1000 }}
           animate={{ translateX: 0 }}
-          exit={{ translateX: 1000 }}
+          exit={{ translateX: -1000 }}
           className='w-[100vw] relative'
         >
           <img

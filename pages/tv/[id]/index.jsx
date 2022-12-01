@@ -110,17 +110,17 @@ const Tv = () => {
                       : 'cursor-pointer overflow-hidden'
                   }
                 >
-                  <h3>{season.name}</h3>
-                  <div className='overflow-hidden'>
+                  <div className='overflow-hidden flex flex-col items-center justify-between'>
+                    <h3>{season.name}</h3>
                     <div className='overflow-hidden' style={seasonStyle}>
                       <img
                         className=' aspect-auto  hover:scale-110 duration-500'
                         src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
                       />
                     </div>
-                    {season.overview && (
+                    {/* {season.overview && (
                       <p className='lg:w-[20vw] text-xs md:text-base lg:text-lg'>{`"${season.overview}"`}</p>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </Link>

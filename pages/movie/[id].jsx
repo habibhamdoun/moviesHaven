@@ -54,7 +54,7 @@ const Movie = () => {
           className='lg:col-span-3 md:w-[100%] md:h-[100%] md:bg-cover'
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
         />
-        <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2'>
+        <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2 border-l-[2px] pb-3 border-yellow-600'>
           <h2 className='text-5xl font-bold'>{movie.original_title}</h2>
           {movie.tagline && (
             <p className='font-semibold italic'>{`"${movie.tagline}"`}</p>
