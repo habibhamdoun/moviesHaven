@@ -1,12 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 import TvRow from './TvRow';
 import BgTv from './BgTv';
 
 const LayoutTv = () => {
-  const router = useRouter();
   return (
     <motion.section
       className='flex flex-col items-center'

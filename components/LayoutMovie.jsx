@@ -1,29 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import MovieRow from './MovieRow';
 import BgMovie from './BgMovie';
 
 const LayoutMovie = () => {
-  const [test, setTest] = React.useState(false);
-  const [bgMovie, setBgMovie] = React.useState({
-    original_title: 'Orphan: First Kill',
-    overview:
-      'After escaping from an Estonian psychiatric facility, Leena Klammer travels to America by impersonating Esther, the missing daughter of a wealthy family. But when her mask starts to slip, she is put against a mother who will protect her family from the murderous “child” at any cost.',
-    backdrop_path: '/5GA3vV1aWWHTSDO5eno8V5zDo8r.jpg',
-  });
-  function handleClick(receivedData) {
-    setTest(true);
-    if (!receivedData) return handleClick;
-    setInterval(() => {
-      let random = Math.floor(Math.random() * receivedData?.length);
-      setBgMovie(receivedData[random]);
-      console.log(bgMovie);
-    }, 3000);
-    if (test) return;
-  }
-  const router = useRouter();
   return (
     <motion.section
       className='flex flex-col items-center'
@@ -62,26 +43,10 @@ const LayoutMovie = () => {
       <BgMovie />
 
       <div className='pt-10'>
-        <MovieRow
-          fetchedGenre={'now_playing'}
-          title={'NOW PLAYING:'}
-          handleClick={handleClick}
-        />
-        <MovieRow
-          fetchedGenre={'top_rated'}
-          title={'TOP RATED:'}
-          handleClick={handleClick}
-        />
-        <MovieRow
-          fetchedGenre={'upcoming'}
-          title={'UPCOMING:'}
-          handleClick={handleClick}
-        />
-        <MovieRow
-          fetchedGenre={'popular'}
-          title={'POPULAR:'}
-          handleClick={handleClick}
-        />
+        <MovieRow fetchedGenre={'now_playing'} title={'NOW PLAYING:'} />
+        <MovieRow fetchedGenre={'top_rated'} title={'TOP RATED:'} />
+        <MovieRow fetchedGenre={'upcoming'} title={'UPCOMING:'} />
+        <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} />
       </div>
     </motion.section>
   );

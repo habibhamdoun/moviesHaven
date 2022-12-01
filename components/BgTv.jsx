@@ -28,9 +28,8 @@ const BgTv = () => {
               }&page=${page || 1}`,
             );
             const returnData = await resp.json();
-            setData(returnData?.results);
+            setGenreDataState(returnData?.results);
             setMaxPages(returnData?.total_pages);
-            setGenreDataState(data && data);
             console.log(genreDataState);
             changeBg();
           } catch (err) {
@@ -40,8 +39,9 @@ const BgTv = () => {
       };
       fetchData();
     }, 2000);
-  }, [genreDataState, data]);
+  }, [genreDataState]);
   function changeBg() {
+    if (!genreDataState) return;
     let random = Math.floor(Math.random() * genreDataState?.length);
     setTimeout(() => {
       setBgTv({
@@ -50,7 +50,7 @@ const BgTv = () => {
         backdrop_path: genreDataState[random]?.backdrop_path,
         id: genreDataState[random]?.id,
       });
-    }, 3000);
+    }, 6000);
 
     console.log(bgTv);
   }

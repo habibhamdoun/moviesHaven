@@ -28,9 +28,8 @@ const BgMovie = () => {
               }&page=${page || 1}`,
             );
             const returnData = await resp.json();
-            setData(returnData?.results);
+            setGenreDataState(returnData?.results);
             setMaxPages(returnData?.total_pages);
-            setGenreDataState(data && data);
             console.log(genreDataState);
             changeBg();
           } catch (err) {
@@ -40,7 +39,7 @@ const BgMovie = () => {
       };
       fetchData();
     }, 2000);
-  }, [genreDataState, data]);
+  }, [genreDataState]);
   function changeBg() {
     let random = Math.floor(Math.random() * genreDataState?.length);
     setTimeout(() => {
