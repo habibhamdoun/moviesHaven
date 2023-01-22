@@ -13,14 +13,16 @@ const LayoutTv = () => {
       transition={{ duration: 100 }}
     >
       <nav className='flex justify-between p-5 w-[90vw]'>
-        <div>
-          <p>
-            Welcome to{' '}
-            <span className='text-2xl font-bold'>
-              Movies<span className='text-yellow-600'>2u</span>
-            </span>
-          </p>
-        </div>
+        <Link href={'/'}>
+          <div className='cursor-pointer'>
+            <p>
+              Welcome to{' '}
+              <span className='text-2xl font-bold'>
+                Movies<span className='text-yellow-600'>2u</span>
+              </span>
+            </p>
+          </div>
+        </Link>
         <div className='flex gap-7 items-center font-semibold text-lg '>
           <Link href='/movies'>
             <button className='hover:text-yellow-600 duration-150'>
