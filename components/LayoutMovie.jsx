@@ -18,7 +18,7 @@ const LayoutMovie = () => {
             <p>
               Welcome to{' '}
               <span className='text-2xl font-bold'>
-                Movies<span className='text-yellow-600'>Recom</span>
+                Movies<span className='text-yellow-600'>Haven</span>
               </span>
             </p>
           </div>
