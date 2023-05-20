@@ -18,7 +18,7 @@ const LayoutTv = () => {
             <p>
               Welcome to{' '}
               <span className='text-2xl font-bold'>
-                Movies<span className='text-yellow-600'>2u</span>
+                Movies<span className='text-yellow-600'>Recom</span>
               </span>
             </p>
           </div>
