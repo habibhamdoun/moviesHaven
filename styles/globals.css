@@ -19,6 +19,8 @@ a {
 
 * {
   box-sizing: border-box;
+  background-color: black;
+  color: white;
 }
 
 @media (prefers-color-scheme: dark) {
