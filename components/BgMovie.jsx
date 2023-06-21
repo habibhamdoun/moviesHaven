@@ -70,11 +70,11 @@ const BgMovie = () => {
               }`}
               className='w-[100vw] h-[100vh] aspect-auto relative'
             />
-            <div className='flex flex-col justify-start items-start gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0 bg-[rgba(0,0,0,0.4)] w-[100%]'>
-              <h2 className='text-7xl font-extrabold pb-2'>
+            <div className='flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0  w-[100%]'>
+              <h2 className='text-7xl font-extrabold pb-2 bg-transparent'>
                 {bgMovie?.original_title}
               </h2>
-              <p className='w-[40%]'>{`"${bgMovie?.overview}"`}</p>
+              <p className='w-[40%] bg-transparent text-xl'>{`"${bgMovie?.overview}"`}</p>
               <Link href={`/movie/${bgMovie?.id}`}>
                 <button className='border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'>
                   About The Movie

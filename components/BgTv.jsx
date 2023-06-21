@@ -70,9 +70,11 @@ const BgTv = () => {
             }`}
             className='w-[100vw] h-[100vh] aspect-auto relative'
           />
-          <div className='flex flex-col justify-start items-start gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0 bg-[rgba(0,0,0,0.4)] w-[100%]'>
-            <h2 className='text-7xl font-extrabold pb-2'>{bgTv.name}</h2>
-            <p className='w-[40%]'>{`"${bgTv?.overview}"`}</p>
+          <div className='flex flex-col justify-start items-start gap-6 border-l-[2px] pb-3 bg-transparent border-yellow-600 pl-8 absolute bottom-0 w-[100%]'>
+            <h2 className='text-7xl font-extrabold pb-2 bg-transparent'>
+              {bgTv.name}
+            </h2>
+            <p className='w-[40%] bg-transparent text-xl'>{`"${bgTv?.overview}"`}</p>
             <Link href={`/movie/${bgTv?.id}`}>
               <button className='border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'>
                 About This Movie
