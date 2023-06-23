@@ -19,14 +19,32 @@ const LayoutTv = () => {
       >
         <Nav />
         <BgTv />
-        <TvRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={1} />
-        <TvRow fetchedGenre={'top_rated'} title={'TOP RATED:'} loadPage={1} />
-        <TvRow fetchedGenre={'on_the_air'} title={'ON THE AIR:'} loadPage={2} />
-        <TvRow
-          fetchedGenre={'airing_today'}
-          title={'AIRING TODAY:'}
-          loadPage={1}
-        />
+        <div className='pt-10'>
+          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
+            POPULAR:
+          </h2>
+          <TvRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={1} />
+          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
+            TOP RATED:
+          </h2>
+          <TvRow fetchedGenre={'top_rated'} title={'TOP RATED:'} loadPage={1} />
+          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
+            ON THE AIR:
+          </h2>
+          <TvRow
+            fetchedGenre={'on_the_air'}
+            title={'ON THE AIR:'}
+            loadPage={2}
+          />
+          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
+            AIRING TODAY:
+          </h2>
+          <TvRow
+            fetchedGenre={'airing_today'}
+            title={'AIRING TODAY:'}
+            loadPage={1}
+          />
+        </div>
       </motion.section>
     </>
   );

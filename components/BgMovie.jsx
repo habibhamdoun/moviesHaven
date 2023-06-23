@@ -94,7 +94,7 @@ const BgMovie = () => {
                 {bgMovie?.original_title}
               </h2>
               <div className='bg-transparent'>
-                <div className='flex flex-col items-start'>
+                <div className='flex flex-col items-start bg-transparent'>
                   <p
                     className={
                       'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'

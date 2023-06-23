@@ -20,21 +20,33 @@ const LayoutMovie = () => {
         <BgMovie />
 
         <div className='pt-10'>
+          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+            NOW PLAYING:
+          </h2>
           <MovieRow
             fetchedGenre={'now_playing'}
             title={'NOW PLAYING:'}
             loadPage={1}
           />
+          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+            TOP RATED:
+          </h2>
           <MovieRow
             fetchedGenre={'top_rated'}
             title={'TOP RATED:'}
             loadPage={1}
           />
+          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+            UPCOMING:
+          </h2>
           <MovieRow
             fetchedGenre={'upcoming'}
             title={'UPCOMING:'}
             loadPage={1}
           />
+          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+            POPULAR:
+          </h2>
           <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={2} />
         </div>
       </motion.section>

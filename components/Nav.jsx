@@ -27,7 +27,13 @@ const Nav = () => {
       </Link>
       <div className='flex gap-7 items-center justify-center font-semibold text-lg '>
         <Link href='/movies'>
-          <button className='text-yellow-600 max-[600px]:text-base '>
+          <button
+            className={
+              router.asPath == '/movies'
+                ? 'text-yellow-600 max-[600px]:text-base hover:text-yellow-600 transition-all'
+                : 'max-[600px]:text-base hover:text-yellow-600 transition-all'
+            }
+          >
             {!isMobile ? (
               'Movies'
             ) : (
@@ -60,8 +66,20 @@ const Nav = () => {
               </svg>
             ) : (
               <>
-                Tv Sh
-                <span className='text-yellow-600 max-[600px]:text-base'>o</span>
+                <span
+                  className={router.asPath == '/tv' ? 'text-yellow-600' : ''}
+                >
+                  Tv Sh
+                </span>
+                <span
+                  className={
+                    router.asPath == '/tv'
+                      ? 'text-yellow-600 max-[600px]:text-base'
+                      : 'max-[600px]:text-base'
+                  }
+                >
+                  o
+                </span>
                 ws
               </>
             )}

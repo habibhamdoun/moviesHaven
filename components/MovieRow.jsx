@@ -36,33 +36,32 @@ const MovieRow = (props) => {
     return <div className='text-5xl'>no data found</div>;
   }
   return (
-    <section className='overflow-scroll w-[100vw] lg:scrollbar-hide'>
-      <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-        {props.title}
-      </h2>
-      <div className='flex w-fit gap-5'>
-        {genreDataState?.map((res) => (
-          <Link key={res.id} href={`/movie/${res.id}`}>
-            <motion.div
-              key={res.id}
-              className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto '
-              initial={{ scale: 0.1 }}
-              animate={{ scale: 1 }}
-            >
-              <div
-                className='overflow-hidden cursor-pointer'
-                style={movieStyle}
+    <>
+      <section className='overflow-scroll w-[100vw] lg:scrollbar-hide'>
+        <div className='flex w-fit gap-5'>
+          {genreDataState?.map((res) => (
+            <Link key={res.id} href={`/movie/${res.id}`}>
+              <motion.div
+                key={res.id}
+                className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto '
+                initial={{ scale: 0.1 }}
+                animate={{ scale: 1 }}
               >
-                <img
-                  className='w-[100%] hover:scale-110 duration-500 rounded-md'
-                  src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
-                />
-              </div>
-              <h2 className='text-2xl font-bold'> {res.original_title} </h2>
-            </motion.div>
-          </Link>
-        ))}
-      </div>
+                <div
+                  className='overflow-hidden cursor-pointer'
+                  style={movieStyle}
+                >
+                  <img
+                    className='w-[100%] hover:scale-110 duration-500 rounded-md'
+                    src={`https://image.tmdb.org/t/p/original${res.poster_path}`}
+                  />
+                </div>
+                <h2 className='text-2xl font-bold'> {res.original_title} </h2>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+      </section>
       <div className='flex justify-center gap-5 py-6'>
         <button
           onClick={() => {
@@ -83,7 +82,7 @@ const MovieRow = (props) => {
           Next Page
         </button>
       </div>
-    </section>
+    </>
   );
 };
 
