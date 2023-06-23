@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { set } from 'nprogress';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { baseUrl } from '../Constants';
 
 const BgTv = () => {
@@ -40,6 +40,7 @@ const BgTv = () => {
       fetchData();
     }, 5000);
   }, [genreDataState]);
+  const [dropDown, setDropDown] = useState(false);
   function changeBg() {
     if (!genreDataState) return;
     let random = Math.floor(Math.random() * genreDataState?.length);
@@ -54,6 +55,13 @@ const BgTv = () => {
 
     console.log(bgTv);
   }
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (window.screen.width < 768) {
+      setIsMobile(true);
+    }
+  }, []);
   console.log(bgTv.name);
   return (
     <section>
@@ -68,15 +76,39 @@ const BgTv = () => {
             src={`https://image.tmdb.org/t/p/w1280${
               bgTv ? bgTv.backdrop_path : '/xfNHRI2f5kHGvogxLd0C5sB90L7.jpg}'
             }`}
-            className='w-[100vw] h-[100vh] aspect-auto relative'
+            className={
+              isMobile
+                ? 'w-[100vw] h-[100vh] aspect-auto relative h-[40vh]'
+                : 'w-[100vw] h-[100vh] aspect-auto relative'
+            }
+            alt='bg image'
           />
-          <div className='flex flex-col justify-start items-start gap-6 border-l-[2px] pb-3 bg-transparent border-yellow-600 pl-8 absolute bottom-0 w-[100%]'>
+          <div
+            className={
+              isMobile
+                ? 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 w-[100%] h-fit'
+                : 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0  w-[100%] h-fit'
+            }
+          >
             <h2 className='text-7xl font-extrabold pb-2 bg-transparent'>
               {bgTv.name}
             </h2>
-            <p className='w-[40%] bg-transparent text-xl'>{`"${bgTv?.overview}"`}</p>
+            <p
+              className={
+                'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
+              }
+            >{`"${bgTv?.overview}"`}</p>
+            {isMobile && (
+              <span className={'bg-transparent border-0 '}>...</span>
+            )}
             <Link href={`/movie/${bgTv?.id}`}>
-              <button className='border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'>
+              <button
+                className={
+                  isMobile
+                    ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-2xl whitespace-nowrap'
+                    : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'
+                }
+              >
                 About This Movie
               </button>
             </Link>
