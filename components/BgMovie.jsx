@@ -80,7 +80,7 @@ const BgMovie = () => {
               }`}
               className={
                 isMobile
-                  ? 'w-[100vw] h-[100vh] aspect-auto relative h-[40vh]'
+                  ? 'w-[100vw] h-[30vh] aspect-auto relative'
                   : 'w-[100vw] h-[100vh] aspect-auto relative'
               }
               alt='bg image'
@@ -92,7 +92,13 @@ const BgMovie = () => {
                   : 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0  w-[100%] h-fit'
               }
             >
-              <h2 className='text-7xl font-extrabold pb-2 bg-transparent'>
+              <h2
+                className={
+                  isMobile
+                    ? 'text-5xl font-extrabold pb-2 bg-transparent'
+                    : 'text-7xl font-extrabold pb-2 bg-transparent'
+                }
+              >
                 {bgMovie?.original_title}
               </h2>
               <div className='bg-transparent'>
