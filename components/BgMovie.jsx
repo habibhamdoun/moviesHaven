@@ -108,7 +108,9 @@ const BgMovie = () => {
                       'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
                     }
                   >
-                    {`"${bgMovie?.overview}"`}
+                    {`"${
+                      bgMovie?.overview == '' ? changeBg() : bgMovie.overview
+                    }"`}
                   </p>
                   {isMobile && (
                     <span className={'bg-transparent border-0 '}>...</span>

@@ -38,30 +38,35 @@ const LayoutTv = () => {
             loadPage={2}
           />
         </div>
+
+        <div className='pt-10'>
+          {others &&
+            movieTitles.map((element) => (
+              <>
+                <div>
+                  <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+                    {element}:
+                  </h2>
+                  <TvRow
+                    fetchedGenre={element
+                      .toLowerCase()
+                      .replace(' ', '_')
+                      .replace(' ', '_')}
+                    title={element}
+                    loadPage={1}
+                  />
+                </div>
+              </>
+            ))}
+        </div>
         <button
           className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          onClick={() => setOthers((prev) => !prev)}
+          onClick={() => {
+            setOthers((prev) => !prev);
+          }}
         >
           {others ? 'Show Less' : 'Show Others'}
         </button>
-        {others &&
-          movieTitles.map((element) => (
-            <>
-              <div>
-                <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-                  {element}:
-                </h2>
-                <TvRow
-                  fetchedGenre={element
-                    .toLowerCase()
-                    .replace(' ', '_')
-                    .replace(' ', '_')}
-                  title={element}
-                  loadPage={1}
-                />
-              </div>
-            </>
-          ))}
       </motion.section>
     </>
   );

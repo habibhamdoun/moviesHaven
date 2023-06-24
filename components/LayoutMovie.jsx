@@ -34,57 +34,32 @@ const LayoutMovie = () => {
             loadPage={2}
           />
         </div>
+
+        <div className='pt-10'>
+          {others &&
+            movieTitles.map((element) => (
+              <>
+                <div>
+                  <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+                    {element}:
+                  </h2>
+                  <MovieRow
+                    fetchedGenre={element.toLowerCase().replace(' ', '_')}
+                    title={element}
+                    loadPage={1}
+                  />
+                </div>
+              </>
+            ))}
+        </div>
         <button
           className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          onClick={() => setOthers((prev) => !prev)}
+          onClick={() => {
+            setOthers((prev) => !prev);
+          }}
         >
           {others ? 'Show Less' : 'Show Others'}
         </button>
-        {others &&
-          movieTitles.map((element) => (
-            <>
-              <div>
-                <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-                  {element}:
-                </h2>
-                <MovieRow
-                  fetchedGenre={element.toLowerCase().replace(' ', '_')}
-                  title={element}
-                  loadPage={1}
-                />
-              </div>
-            </>
-          ))}
-        {/* <div className='pt-10'>
-          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-            NOW PLAYING:
-          </h2>
-          <MovieRow
-            fetchedGenre={'now_playing'}
-            title={'NOW PLAYING:'}
-            loadPage={1}
-          />
-          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-            TOP RATED:
-          </h2>
-          <MovieRow
-            fetchedGenre={'top_rated'}
-            title={'TOP RATED:'}
-            loadPage={1}
-          />
-          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-            UPCOMING:
-          </h2>
-          <MovieRow
-            fetchedGenre={'upcoming'}
-            title={'UPCOMING:'}
-            loadPage={1}
-          />
-          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
-            POPULAR:
-          </h2>
-          <MovieRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={2} />
-        </div> */}
       </motion.section>
     </>
   );
