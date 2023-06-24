@@ -30,7 +30,10 @@ const LayoutTv = () => {
             {movieTitles[rnd]}:
           </h2>
           <TvRow
-            fetchedGenre={movieTitles[rnd].toLowerCase().replace(' ', '_')}
+            fetchedGenre={movieTitles[rnd]
+              .toLowerCase()
+              .replace(' ', '_')
+              .replace(' ', '_')}
             title={movieTitles[rnd]}
             loadPage={2}
           />

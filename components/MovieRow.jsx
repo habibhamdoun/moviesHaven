@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { baseUrl } from '../Constants';
 
@@ -9,6 +9,13 @@ const MovieRow = (props) => {
   const [page, setPage] = React.useState(null);
   const [maxPages, setMaxPages] = React.useState(0);
   const [loadPage, setLoadPage] = React.useState(props.loadPage);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (window.screen.width < 768) {
+      setIsMobile(true);
+    }
+  }, []);
   const movieStyle = {
     borderRadius: '46px 46px 46px 46px',
     webkitBorderRadius: '46px 46px 46px 46px',
@@ -44,8 +51,10 @@ const MovieRow = (props) => {
               <motion.div
                 key={res.id}
                 className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto '
-                initial={{ scale: 0.1 }}
-                animate={{ scale: 1 }}
+                initial={{ translateX: isMobile ? 150 : 300 }}
+                whileInView={{ translateX: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
               >
                 <div
                   className='overflow-hidden cursor-pointer'

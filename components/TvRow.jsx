@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { baseUrl } from '../Constants';
 
@@ -10,6 +10,14 @@ const TvRow = (props) => {
   const [loading, setLoading] = React.useState(true);
   const [maxPages, setMaxPages] = React.useState(0);
   const [loadPage, seetLoadPage] = React.useState(props.loadPage);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (window.screen.width < 768) {
+      setIsMobile(true);
+    }
+  }, []);
   const tvStyle = {
     borderRadius: '46px 46px 46px 46px',
     webkitBorderRadius: '46px 46px 46px 46px',
@@ -48,8 +56,10 @@ const TvRow = (props) => {
               <motion.div
                 key={res.id}
                 className='flex flex-col items-center justify-center h-fit overflow-hidden relative w-[20rem] aspect-auto'
-                initial={{ scale: 0.1 }}
-                animate={{ scale: 1 }}
+                initial={{ translateX: isMobile ? 150 : 300 }}
+                whileInView={{ translateX: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
               >
                 <div className='overflow-hidden cursor-pointer' style={tvStyle}>
                   <img
