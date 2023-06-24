@@ -49,6 +49,7 @@ const BgMovie = () => {
         overview: genreDataState[random]?.overview,
         backdrop_path: genreDataState[random]?.backdrop_path,
       });
+      setKey((prev) => prev++);
     }, 3000);
     console.log(bgMovie);
   }
@@ -59,7 +60,7 @@ const BgMovie = () => {
       setIsMobile(true);
     }
   }, []);
-
+  const [key, setKey] = useState(0);
   return (
     <section>
       <AnimatePresence>
@@ -69,6 +70,7 @@ const BgMovie = () => {
             animate={{ translateX: 0 }}
             exit={{ translateX: 1000 }}
             className='w-[100vw] relative'
+            key={key}
           >
             <img
               src={`https://image.tmdb.org/t/p/w1280${
