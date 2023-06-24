@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import TvRow from './TvRow';
@@ -7,7 +7,13 @@ import Head from 'next/head';
 import Nav from './Nav';
 
 const LayoutTv = () => {
+  const [others, setOthers] = useState(false);
   const router = useRouter();
+  const movieTitles = ['POPULAR', 'TOP RATED', 'ON THE AIR', 'AIRING TODAY'];
+  const [rnd, setRnd] = useState(0);
+  useEffect(() => {
+    setRnd(Math.floor(Math.random() * movieTitles.length));
+  }, []);
   return (
     <>
       <Head>
@@ -19,32 +25,40 @@ const LayoutTv = () => {
       >
         <Nav />
         <BgTv />
-        <div className='pt-10'>
-          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
-            POPULAR:
-          </h2>
-          <TvRow fetchedGenre={'popular'} title={'POPULAR:'} loadPage={1} />
-          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
-            TOP RATED:
-          </h2>
-          <TvRow fetchedGenre={'top_rated'} title={'TOP RATED:'} loadPage={1} />
-          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
-            ON THE AIR:
+        <div>
+          <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+            {movieTitles[rnd]}:
           </h2>
           <TvRow
-            fetchedGenre={'on_the_air'}
-            title={'ON THE AIR:'}
+            fetchedGenre={movieTitles[rnd].toLowerCase().replace(' ', '_')}
+            title={movieTitles[rnd]}
             loadPage={2}
           />
-          <h2 className='text-5xl mt-2 py-4 border-yellow-600 border-l-[2px]'>
-            AIRING TODAY:
-          </h2>
-          <TvRow
-            fetchedGenre={'airing_today'}
-            title={'AIRING TODAY:'}
-            loadPage={1}
-          />
         </div>
+        <button
+          className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
+          onClick={() => setOthers((prev) => !prev)}
+        >
+          {others ? 'Show Less' : 'Show Others'}
+        </button>
+        {others &&
+          movieTitles.map((element) => (
+            <>
+              <div>
+                <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
+                  {element}:
+                </h2>
+                <TvRow
+                  fetchedGenre={element
+                    .toLowerCase()
+                    .replace(' ', '_')
+                    .replace(' ', '_')}
+                  title={element}
+                  loadPage={1}
+                />
+              </div>
+            </>
+          ))}
       </motion.section>
     </>
   );
