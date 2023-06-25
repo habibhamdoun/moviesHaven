@@ -65,62 +65,59 @@ const BgTv = () => {
   console.log(bgTv.name);
   return (
     <section>
-      <AnimatePresence>
-        <motion.div
+      <motion.div className='w-[100vw] relative' key={bgTv}>
+        <motion.img
           initial={{ translateX: 1000 }}
           animate={{ translateX: 0 }}
-          exit={{ translateX: -1000 }}
-          className='w-[100vw] relative'
+          src={`https://image.tmdb.org/t/p/w1280${
+            bgTv ? bgTv.backdrop_path : '/xfNHRI2f5kHGvogxLd0C5sB90L7.jpg}'
+          }`}
+          key={bgTv.backdrop_path}
+          className={
+            isMobile
+              ? 'w-[100vw] h-[35vh] aspect-auto relative'
+              : 'w-[100vw] h-[100vh] aspect-auto relative'
+          }
+          alt='loading...'
+        />
+        <motion.div
+          className={
+            isMobile
+              ? 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 w-[100%] h-fit'
+              : 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0  w-[100%] h-fit'
+          }
+          initial={{ translateX: -1000 }}
+          animate={{ translateX: 0 }}
+          key={bgTv.name}
         >
-          <img
-            src={`https://image.tmdb.org/t/p/w1280${
-              bgTv ? bgTv.backdrop_path : '/xfNHRI2f5kHGvogxLd0C5sB90L7.jpg}'
-            }`}
+          <h2
             className={
               isMobile
-                ? 'w-[100vw] h-[35vh] aspect-auto relative'
-                : 'w-[100vw] h-[100vh] aspect-auto relative'
-            }
-            alt='bg image'
-          />
-          <div
-            className={
-              isMobile
-                ? 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 w-[100%] h-fit'
-                : 'flex flex-col justify-start items-start bg-transparent gap-6 border-l-[2px] pb-3 border-yellow-600 pl-8 absolute bottom-0  w-[100%] h-fit'
+                ? 'text-5xl font-extrabold pb-2 bg-transparent'
+                : 'text-7xl font-extrabold pb-2 bg-transparent'
             }
           >
-            <h2
+            {bgTv.name}
+          </h2>
+          <p
+            className={
+              'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
+            }
+          >{`"${bgTv?.overview == '' ? changeBg() : bgTv.overview}"`}</p>
+          {isMobile && <span className={'bg-transparent border-0 '}>...</span>}
+          <Link href={`/movie/${bgTv?.id}`}>
+            <button
               className={
                 isMobile
-                  ? 'text-5xl font-extrabold pb-2 bg-transparent'
-                  : 'text-7xl font-extrabold pb-2 bg-transparent'
+                  ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-2xl whitespace-nowrap'
+                  : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'
               }
             >
-              {bgTv.name}
-            </h2>
-            <p
-              className={
-                'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
-              }
-            >{`"${bgTv?.overview == '' ? changeBg() : bgTv.overview}"`}</p>
-            {isMobile && (
-              <span className={'bg-transparent border-0 '}>...</span>
-            )}
-            <Link href={`/movie/${bgTv?.id}`}>
-              <button
-                className={
-                  isMobile
-                    ? 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-2xl whitespace-nowrap'
-                    : 'border-yellow-600 border-[2px] rounded-lg p-2 w-fit mt-7 text-4xl'
-                }
-              >
-                About This Movie
-              </button>
-            </Link>
-          </div>
+              About This Movie
+            </button>
+          </Link>
         </motion.div>
-      </AnimatePresence>
+      </motion.div>
     </section>
   );
 };
