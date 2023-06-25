@@ -10,6 +10,7 @@ const LayoutMovie = () => {
   const router = useRouter();
   const movieTitles = ['NOW PLAYING', 'TOP RATED', 'UPCOMING', 'POPULAR'];
   const [rnd, setRnd] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   useEffect(() => {
     setRnd(Math.floor(Math.random() * movieTitles.length));
   }, []);
@@ -54,7 +55,8 @@ const LayoutMovie = () => {
         </div>
         <button
           className='border-yellow-600 border-[2px] rounded-lg p-2 disabled:opacity-50'
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setOthers((prev) => !prev);
           }}
         >

@@ -54,7 +54,6 @@ const BgMovie = () => {
   }
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (window.screen.width < 768) {
       setIsMobile(true);
     }
