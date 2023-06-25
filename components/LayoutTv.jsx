@@ -25,7 +25,7 @@ const LayoutTv = () => {
       >
         <Nav />
         <BgTv />
-        <div>
+        <div className='pt-10'>
           <h2 className='text-5xl pb-4 border-l-[2px] pb-3 border-yellow-600'>
             {movieTitles[rnd]}:
           </h2>

@@ -53,7 +53,7 @@ const MovieRow = (props) => {
                 initial={{ translateX: isMobile ? 150 : 300 }}
                 whileInView={{ translateX: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.25 }}
               >
                 <div
                   className='overflow-hidden cursor-pointer'
