@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { baseUrl } from '../../../Constants';
 import Link from 'next/link';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import Head from 'next/head';
 
 const Tv = () => {
   const [tv, setTv] = React.useState(undefined);
@@ -69,92 +70,102 @@ const Tv = () => {
   if (loading) return <div>Loading...</div>;
   if (!loading && !tv?.original_name) return <div> NO DATA FOUND</div>;
   return (
-    <section className='flex flex-col lg:items-start lg:justify-start lg:py-10 gap-6'>
-      <div className='grid lg:grid-cols-5'>
-        <img
-          style={imgStyles}
-          className='lg:col-span-3'
-          src={`https://image.tmdb.org/t/p/original${tv.backdrop_path}`}
+    <>
+      <Head>
+        <title>{tv.original_name}-MoviesHaven</title>
+        <meta
+          name='description'
+          content='Discover and explore a dynamic movie showcase powered by Next.js and the TMDB API. Experience a constantly updated collection of movies, featuring the latest releases, popular films, and timeless classics. With automatic updates and seamless navigation, this website brings the world of cinema to your fingertips.'
         />
-        <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2 pb-4 border-yellow-600 border-l-[2px]'>
-          <h2 className='text-5xl font-bold'>{tv.original_name}</h2>
-          {tv.tagline && (
-            <p className='font-semibold italic'>{`"${tv.tagline}"`}</p>
-          )}
-          <p className='lg:w-[35vw]'>{tv.overview}</p>
-          <p>first aired in : {tv.first_air_date}.</p>
-          <p>seasons: {tv.number_of_seasons}</p>
-          <p>total episodes: {tv.number_of_episodes}</p>
-          {tv.homepage && (
-            <a
-              target='_blank'
-              href={tv?.homepage}
-              className='border-yellow-600 border-[2px] rounded-lg p-2 w-fit'
-              rel='noreferrer'
-            >
-              Movie Homepage
-            </a>
-          )}
-        </div>
-        <section className='w-[100vw] grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2  gap-9'>
-          {tv?.seasons.map((season) => {
-            return (
-              <Link
-                key={season.id}
-                href={`/tv/${id}/season/${season.season_number}`}
+        <link rel='icon' href='/favicon.ico' type='image/x-icon'></link>
+      </Head>
+      <section className='flex flex-col lg:items-start lg:justify-start lg:py-10 gap-6'>
+        <div className='grid lg:grid-cols-5'>
+          <img
+            style={imgStyles}
+            className='lg:col-span-3'
+            src={`https://image.tmdb.org/t/p/original${tv.backdrop_path}`}
+          />
+          <div className='flex flex-col gap-5 lg:col-span-2 sm:text-sm px-2 pb-4 border-yellow-600 border-l-[2px]'>
+            <h2 className='text-5xl font-bold'>{tv.original_name}</h2>
+            {tv.tagline && (
+              <p className='font-semibold italic'>{`"${tv.tagline}"`}</p>
+            )}
+            <p className='lg:w-[35vw]'>{tv.overview}</p>
+            <p>first aired in : {tv.first_air_date}.</p>
+            <p>seasons: {tv.number_of_seasons}</p>
+            <p>total episodes: {tv.number_of_episodes}</p>
+            {tv.homepage && (
+              <a
+                target='_blank'
+                href={tv?.homepage}
+                className='border-yellow-600 border-[2px] rounded-lg p-2 w-fit'
+                rel='noreferrer'
               >
-                <div
-                  className={
-                    season.name == 'Specials'
-                      ? 'cursor-pointer overflow-hidden order-last'
-                      : 'cursor-pointer overflow-hidden'
-                  }
+                Movie Homepage
+              </a>
+            )}
+          </div>
+          <section className='w-[100vw] grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2  gap-9'>
+            {tv?.seasons.map((season) => {
+              return (
+                <Link
+                  key={season.id}
+                  href={`/tv/${id}/season/${season.season_number}`}
                 >
-                  <div className='overflow-hidden flex flex-col items-center justify-between'>
-                    <h3 className='border-yellow-600 border-[2px] rounded p-1 m-1'>
-                      {season.name}
-                    </h3>
-                    <div className='overflow-hidden' style={seasonStyle}>
+                  <div
+                    className={
+                      season.name == 'Specials'
+                        ? 'cursor-pointer overflow-hidden order-last'
+                        : 'cursor-pointer overflow-hidden'
+                    }
+                  >
+                    <div className='overflow-hidden flex flex-col items-center justify-between'>
+                      <h3 className='border-yellow-600 border-[2px] rounded p-1 m-1'>
+                        {season.name}
+                      </h3>
+                      <div className='overflow-hidden' style={seasonStyle}>
+                        <img
+                          className=' aspect-auto  hover:scale-110 duration-500'
+                          src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </section>
+        </div>
+        <div className='flex flex-wrap gap-5 '>
+          <h2 className='text-5xl'>You may also like:</h2>
+          <div className='flex flex-wrap items-center justify-center gap-8'>
+            {similar?.length > 0 &&
+              similar.map((res) => (
+                <Link key={res.id} href={`/tv/${res.id}`}>
+                  <motion.div
+                    className='flex flex-col items-center justify-center w-72 rounded gap-5 h-fit overflow-hidden relative'
+                    initial={{ scale: 0.1 }}
+                    animate={{ scale: 1 }}
+                    key={res.id}
+                  >
+                    <div className='overflow-hidden cursor-pointer aspect-square rounded-full'>
                       <img
-                        className=' aspect-auto  hover:scale-110 duration-500'
-                        src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
+                        className='w-100% hover:scale-110 duration-500'
+                        src={`https://image.tmdb.org/t/p/w500${res.poster_path}`}
                       />
                     </div>
-                    {/* {season.overview && (
-                      <p className='lg:w-[20vw] text-xs md:text-base lg:text-lg'>{`"${season.overview}"`}</p>
-                    )} */}
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </section>
-      </div>
-      <div className='flex flex-wrap gap-5 '>
-        <h2 className='text-5xl'>You may also like:</h2>
-        <div className='flex flex-wrap items-center justify-center gap-8'>
-          {similar?.length > 0 &&
-            similar.map((res) => (
-              <Link key={res.id} href={`/tv/${res.id}`}>
-                <motion.div
-                  className='flex flex-col items-center justify-center w-72 rounded gap-5 h-fit overflow-hidden relative'
-                  initial={{ scale: 0.1 }}
-                  animate={{ scale: 1 }}
-                  key={res.id}
-                >
-                  <div className='overflow-hidden cursor-pointer aspect-square rounded-full'>
-                    <img
-                      className='w-100% hover:scale-110 duration-500'
-                      src={`https://image.tmdb.org/t/p/w500${res.poster_path}`}
-                    />
-                  </div>
-                  <h2 className='text-2xl font-bold'> {res.original_name} </h2>
-                </motion.div>
-              </Link>
-            ))}
+                    <h2 className='text-2xl font-bold'>
+                      {' '}
+                      {res.original_name}{' '}
+                    </h2>
+                  </motion.div>
+                </Link>
+              ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
