@@ -98,15 +98,17 @@ const BgMovie = () => {
           </h2>
           <div className='bg-transparent'>
             <div className='flex flex-col items-start bg-transparent'>
-              <p
-                className={
-                  'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
-                }
-              >
-                {`"${bgMovie?.overview ? bgMovie.overview : changeBg()}"`}
+              <p className={'w-[40%] overflow-hidden bg-transparent text-base'}>
+                {`"${
+                  bgMovie?.overview != undefined
+                    ? bgMovie.overview.split(' ').splice(0, 60).join(' ')
+                    : changeBg()
+                }"`}
               </p>
-              {isMobile && (
+              {bgMovie.overview.split(' ').length > 60 ? (
                 <span className={'bg-transparent border-0 '}>...</span>
+              ) : (
+                ''
               )}
             </div>
             <Link href={`/movie/${bgMovie?.id}`}>

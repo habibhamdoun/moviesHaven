@@ -100,11 +100,17 @@ const BgTv = () => {
             {bgTv.name}
           </h2>
           <p
-            className={
-              'w-[40%] overflow-hidden h-[200px] bg-transparent text-base'
-            }
-          >{`"${bgTv?.overview == '' ? changeBg() : bgTv.overview}"`}</p>
-          {isMobile && <span className={'bg-transparent border-0 '}>...</span>}
+            className={'w-[40%] overflow-hidden bg-transparent text-base'}
+          >{`"${
+            bgTv?.overview == undefined
+              ? changeBg()
+              : bgTv.overview.split(' ').splice(0, 60).join(' ')
+          }"`}</p>
+          {bgTv.overview.split(' ').length > 60 ? (
+            <span className={'bg-transparent border-0 '}>...</span>
+          ) : (
+            ''
+          )}
           <Link href={`/movie/${bgTv?.id}`}>
             <button
               className={

@@ -15,14 +15,7 @@ const Nav = () => {
     <nav className='flex justify-between p-5 w-[90vw]'>
       <Link href={'/'}>
         <div className='cursor-pointer flex items-center font-bold'>
-          {/* <p>
-            Welcome to{' '}
-            <span className='text-lg font-bold'>
-              Movies
-              <span className='text-yellow-600 text-lg'>Haven</span>
-            </span>
-          </p> */}
-          {isMobile ? '' : <p>Mo</p>}
+          {isMobile ? '' : <p>M</p>}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width={isMobile ? '32' : '40'}
