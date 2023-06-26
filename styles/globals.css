@@ -21,7 +21,9 @@ a {
   box-sizing: border-box;
   background-color: black;
   color: white;
-  scrollbar-color: black;
+  scrollbar-color: transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-face-color: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
